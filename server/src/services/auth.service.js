@@ -24,8 +24,7 @@ throw new WeakPasswordError();
 const passwordHash = await bcrypt.hash(password, 10);
 let user;
 try {
-user = await UserRepository.create({ email, displayNam
-e, passwordHash });
+user = await UserRepository.create({ email, displayName, passwordHash });
 } catch (err) {
 // Defense in depth (Lecture 4): the DB's @unique
 // constraint may reject a race-condition duplicate that slipped
