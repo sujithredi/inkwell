@@ -5,7 +5,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -33,4 +32,17 @@ body String
 status PostStatus @default(DRAFT)
 publishedAt DateTime?
 createdAt DateTime @default(now())
+tags PostTag[]
+}
+model Tag {
+id String @id @default(uuid())
+name String @unique
+posts PostTag[]
+}
+model PostTag {
+postId String
+tagId String
+post Post @relation(fields: [postId], references: [id])
+tag Tag @relation(fields: [tagId], references: [id])
+@@id([postId, tagId])
 }
